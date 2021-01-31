@@ -6,6 +6,11 @@ import TheirMessage from "../TheirMessage/TheirMessage";
 const ChatFeed = (props) => {
   const { chats, activeChat, userName, messages } = props;
   const chat = chats && chats[activeChat];
+  const logoutHandler = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("password");
+    window.location.reload();
+  };
   const renderReadReceipts = (message, isMyMessage) => {
     return chat.people.map(
       (person, index) =>
@@ -56,10 +61,26 @@ const ChatFeed = (props) => {
   if (!chat) return "Loading..";
   return (
     <div className="chat-feed">
-      <div className="chat-title-container">
-        <div className="chat-title">{chat.title}</div>
-        <div className="chat-subtitle">
-          {chat.people.map((person) => ` ${person.person.username}`)}
+      <div className="button-container">
+        <div className="chat-title-container">
+          <div className="chat-title">{chat.title}</div>
+          <div className="chat-subtitle">
+            {chat.people.map((person) => ` ${person.person.username}`)}
+          </div>
+        </div>
+        <div>
+          <button
+            style={{
+              padding: "5px",
+              backgroundColor: "#3B2A50",
+              color: "white",
+              outline: "none",
+              border: "none",
+            }}
+            onClick={logoutHandler}
+          >
+            Logout
+          </button>
         </div>
       </div>
       {renderMessages()}
