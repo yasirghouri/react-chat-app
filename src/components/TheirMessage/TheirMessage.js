@@ -16,10 +16,20 @@ const TheirMessage = ({ lastMessage, message }) => {
           src={message.attachments[0].file}
           alt="message-attachment"
           className="message-image"
-          style={{ float: "right" }}
+          style={{ marginLeft: isFirstMessageByUser ? "4px" : "48px" }}
         />
-      ) : null}
-      }
+      ) : (
+        <div
+          className="message"
+          style={{
+            float: "left",
+            backgroundColor: "#CABCDC",
+            marginLeft: isFirstMessageByUser ? "4px" : "48px",
+          }}
+        >
+          {message.text}
+        </div>
+      )}
     </div>
   );
 };
